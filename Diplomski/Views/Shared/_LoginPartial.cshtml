@@ -1,0 +1,120 @@
+﻿
+@using Diplomski.Models;
+
+@{ 
+    User user = ViewData["user"] as User;
+}
+
+@if (user != null && user.ChiefHRManager != false)
+
+
+//ovo je za HR
+{
+    using (Html.BeginForm("LogOff", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+
+        @*<li>@Html.ActionLink("Find player", "Index", "Message", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Info/News", "SendReview", "Info", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Reviews", "SendReview", "Review", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+        @*<li>@Html.ActionLink("About", "About", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+       <li>@Html.ActionLink("LRF Requests", "ListOfLeaveRequests", "Head", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Employees", "ListOfUsers", "HeadHR", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Profile", "Edit", "HeadHR", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Register User", "RegisterUser", "HeadHr", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+
+        <li>
+            @Html.ActionLink("Hello " + user.Firstname + "!", "HRMHome", "HeadHR", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+
+     
+    
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    </ul>
+    }
+}
+//Employee: profesor,asistant
+else if (user != null && user.ChiefHRManager !=true && user.HeadOfDep !=true)
+{
+    using (Html.BeginForm("LogOff", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <ul class="nav navbar-nav navbar-right">
+
+            <li>@Html.ActionLink("LRF", "ListOfLeaveRequests", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            <li>@Html.ActionLink("Contact", "Contact", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>          
+            <li>@Html.ActionLink("Make a Leave", "LeaveRequest", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            <li>@Html.ActionLink("Profile", "Edit", "Users", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            <li>@Html.ActionLink("Contact", "Contact", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+
+            <li>
+                @Html.ActionLink("Hello " + user.Firstname + "!", "PoslijeLogin", "Users", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+
+
+    }
+}
+//head of department
+else if (user != null && user.HeadOfDep ==true )
+{
+    using (Html.BeginForm("LogOff", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <ul class="nav navbar-nav navbar-right">
+
+           
+            <li>@Html.ActionLink("Make a Leave", "LeaveRequest", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+          
+            <li>@Html.ActionLink("List LRF", "ListOfLeaveRequests", "Head", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            <li>@Html.ActionLink("Contact", "Contact", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+
+            <li>
+                @Html.ActionLink("Hello " + user.Firstname + "!", "PoslijeLogin", "Users", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+
+
+    }
+}
+// ovo je kad je dean
+else if (user != null && user.Dean == true)
+{
+    using (Html.BeginForm("LogOff", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <ul class="nav navbar-nav navbar-right">
+
+           <li>@Html.ActionLink("Make a Leave", "LeaveRequest", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            <li>@Html.ActionLink("List LRF", "ListOfLeaveRequests", "Head", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            
+            <li>@Html.ActionLink("Contact", "Contact", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+
+            <li>
+                @Html.ActionLink("Hello " + user.Firstname + "!", "PoslijeLogin", "Users", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+
+
+    }
+}
+
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+   
+        <li>@Html.ActionLink("Log in", "UserLogin", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

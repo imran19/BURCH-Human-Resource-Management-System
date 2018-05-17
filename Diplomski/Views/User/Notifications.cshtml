@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Diplomski.Models.Notification>
+
+@{
+    ViewBag.Title = "Notifications";
+}
+
+<h2>Notifications</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovingUser.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovingUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @if (item.Status == "Pending")
+            {
+                @Html.ActionLink("Decline", "SetStatus", new { id = item.NotificationId, text = "Declined" }) @(" | ")
+                @Html.ActionLink("Accept", "SetStatus", new { id = item.NotificationId, text = "Accepted" }) @(" | ")
+            }
+            else
+            {
+                @Html.ActionLink("Set to pending", "SetStatus", new { id = item.NotificationId, text = "Pending" })
+            }
+        </td>
+    </tr>
+}
+
+</table>

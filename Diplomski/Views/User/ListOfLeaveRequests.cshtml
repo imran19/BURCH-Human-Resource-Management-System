@@ -1,0 +1,182 @@
+﻿
+@model IEnumerable<Diplomski.Models.LeaveRequestForm>
+
+
+
+
+<head>
+</head>
+<body style="width: 100%; height: 100%;">
+
+
+
+</body>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Department)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfRequest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BeginningOfLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndOfLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeRegNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeaveType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Explanation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Signature)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DurationOfLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusHead)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusDean)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusHRM)
+        </th>
+       
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfRequest)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeginningOfLeave)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndOfLeave)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeRegNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeaveType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Explanation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Signature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DurationOfLeave)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusHead)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusDean)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusHRM)
+            </td>
+            
+
+        </tr>
+    }
+
+</table>
+
+<style>
+    .button {
+        position: relative;
+        background-color: #4CAF50;
+        border: none;
+        font-size: 12px;
+        color: #FFFFFF;
+        padding: 10px;
+        width: 90px;
+        text-align: center;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        text-decoration: none;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+        .button:after {
+            content: "";
+            background: #90EE90;
+            display: block;
+            position: absolute;
+            padding-top: 300%;
+            padding-left: 350%;
+            margin-left: -20px !important;
+            margin-top: -120%;
+            opacity: 0;
+        }
+
+        .button:active:after {
+            padding: 0;
+            margin: 0;
+            opacity: 1;
+            transition: 0s;
+        }
+
+    body {
+        margin-top:100px;
+        background-color:transparent;
+        margin-left:-200px;
+    }
+
+    .table {
+        background-color: white;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+
+
+    html {
+      
+ 
+        background: url('/assets/ibu-bg.jpg') no-repeat center center fixed;
+        /*webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;*/
+        background-size: cover;
+
+    }
+
+</style>

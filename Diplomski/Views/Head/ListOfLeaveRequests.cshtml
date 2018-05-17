@@ -1,0 +1,216 @@
+﻿@model PagedList.IPagedList<Diplomski.Models.LeaveRequestForm>
+@using PagedList.Mvc;
+
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "ListOfLeaveRequests";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.TextBox("SearchString")
+
+        <input type="submit" value="Search" class="button" />
+
+    </p>
+}
+
+
+
+<h1> </h1>
+<h1> </h1>
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayName("Department")
+        </th>
+        <th>
+            @Html.DisplayName("Firstname")
+        <th>
+            @Html.DisplayName("Lastname")
+        </th>
+        <th>
+            @Html.DisplayName("Title")
+        <th>
+            @Html.DisplayName("Date of request")
+        </th>
+        <th>
+            @Html.DisplayName("Beginning of leave")
+        </th>
+        <th>
+            @Html.DisplayName("End of leave")
+        </th>
+        <th>
+            @Html.DisplayName("Employee Registration Number")
+        </th>
+        <th>
+            @Html.DisplayName("Leave Type")
+        <th>
+            @Html.DisplayName("Explanation")
+        </th>
+        <th>
+            @Html.DisplayName("Address on leave")
+        </th>
+        <th>
+            @Html.DisplayName("Telephone on leave")
+        </th>
+        <th>
+            @Html.DisplayName("Status-Head")
+        </th>
+        <th>
+            @Html.DisplayName("Status-Dean")
+        </th>
+        <th>
+            @Html.DisplayName("Status-HRM")
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Department)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfRequest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BeginningOfLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndOfLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeRegNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeaveType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Explanation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressOnLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TelephoneOnLeave)
+        </td>
+        <td>
+            @if (item.StatusHead == "Pending")
+            {
+                @Html.ActionLink("Decline", "SetStatus", new { id = item.Id, text = "Decline" }) @(" | ")
+                @Html.ActionLink("Accept", "SetStatus", new { id = item.Id, text = "Accepted" }) @(" | ")
+            }
+            else
+            {
+                @Html.ActionLink("Set to pending", "SetStatus", new { id = item.Id, text = "Pending" }) @(" | ")
+            }
+        </td>   
+        <td>
+            @if (item.StatusDean == "Pending")
+            {
+                @Html.ActionLink("Decline", "SetStatus", new { id = item.Id, text = "Decline" }) @(" | ")
+                @Html.ActionLink("Accept", "SetStatus", new { id = item.Id, text = "Accepted" }) @(" | ")
+            }
+            else
+            {
+                @Html.ActionLink("Set to pending", "SetStatus", new { id = item.Id, text = "Pending" }) @(" | ")
+            }
+        </td>       
+        <td>
+            @if (item.StatusHRM == "Pending")
+            {
+                @Html.ActionLink("Decline", "SetStatus", new { id = item.Id, text = "Decline" }) @(" | ")
+                @Html.ActionLink("Accept", "SetStatus", new { id = item.Id, text = "Accepted" }) @(" | ")
+            }
+            else
+            {
+                @Html.ActionLink("Set to pending", "SetStatus", new { id = item.Id, text = "Pending" }) @(" | ")
+            }
+        </td>   
+    </tr>
+}
+
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("ListOfLeaveRequests", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+<style>
+    html {
+        background: url('/assets/ibu-bg.jpg') no-repeat center center fixed;
+        /*webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;*/
+        background-size: cover;
+    }
+
+    .button {
+        position: relative;
+        background-color: #428bca;
+        border: none;
+        font-size: 12px;
+        color: #FFFFFF;
+        padding: 10px;
+        width: 90px;
+        text-align: center;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        text-decoration: none;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+        .button:after {
+            content: "";
+            background: #90EE90;
+            display: block;
+            position: absolute;
+            padding-top: 300%;
+            padding-left: 350%;
+            margin-left: -20px !important;
+            margin-top: -120%;
+            opacity: 0;
+        }
+
+        .button:active:after {
+            padding: 0;
+            margin: 0;
+            opacity: 1;
+            transition: 0s;
+        }
+
+    body {
+        color: black;
+        background-color: transparent;
+        margin-bottom: auto;
+    }
+
+    
+
+    .table {
+        background-color: white;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        width: 200px;
+        margin-left: -260px;
+        margin-right: auto;
+    }
+</style>

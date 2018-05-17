@@ -1,0 +1,317 @@
+﻿@model PagedList.IPagedList<Diplomski.Models.User>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "ListOfUsers";
+}
+
+<h1> </h1>
+
+
+@using (Html.BeginForm())
+{
+    <p>
+         @Html.TextBox("SearchString")
+        
+            <input type="submit" value="Search" class="button" />
+        
+    </p>
+}
+
+
+@*@using (Html.BeginForm("ListOfUsers", "User", FormMethod.Get))
+{
+    <p>
+        Find user: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}*@
+
+<head>
+</head>
+<body style="width: 100%; height: 100% ">
+
+
+
+</body>
+
+@*<table width="100%" class="table" >*@
+<table @*align="left" border="0" cellspacing="0" cellpadding="0"*@ class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Image")
+        </th>
+
+        <th>
+            @Html.ActionLink("Firstname", "ListOfUsers", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Lastname", "ListOfUsers", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            @Html.DisplayName("ID")
+        </th>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+
+        <th>
+            @Html.DisplayName("Adress")
+        </th>
+        <th>
+            @Html.DisplayName("Title")
+        </th>
+        <th>
+            @Html.DisplayName("Faculty")
+        </th>
+        <th>
+            @Html.DisplayName("Department")
+        </th>
+
+        <th>
+            @Html.DisplayName("Country")
+        </th>
+        <th>
+            @Html.DisplayName("Date Of Birth")
+        </th>
+        <th>
+            @Html.DisplayName("Electoral Period")
+        </th>
+        <th>
+            @Html.ActionLink("Contract Expires", "ListOfUsers" , new { sortOrder = ViewBag.DateSortParameter })
+        </th>
+        <th>
+            @Html.DisplayName("Leave days")
+        </th>
+        <th>
+            @Html.DisplayName("Stay")
+        </th>
+        <th>
+            @Html.DisplayName("User Profile Options              ")
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @if (item.Image != null)
+            {
+                <img width="50" height="50" src="data:image;base64,@System.Convert.ToBase64String(item.Image)" />
+
+            }
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeRegNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Faculty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.CountryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ElectoralPeriod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContractExpiration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfLeaveDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stay)
+        </td>
+
+        <td>    
+            
+                <a class="btn btn-info" href="/HeadHR/Details?id=@item.Id" >Details</a>
+                <a class="btn btn-primary" href="/HeadHR/HrEditUser?id=@item.Id">Edit</a>
+                <a class="btn btn-danger" href="/HeadHR/DeleteUser?id=@item.Id" onclick="return confirm('Are you sure you wish to delete this user?');">Delete</a>
+                 @*@Html.ActionLink("Delete", "DeleteUser", new { id = item.Id } , new { onclick = "return confirm('Are you sure you wish to delete this user?');" })*@
+               
+
+            @*<button onclick="@Url.Action("DeleteUser", "DeleteUser", new {id = item.Id } , new { onclick = "return confirm('Are you sure you wish to delete this user?');" })">Delete</button>*@
+
+
+
+                @*<ajaxToolkit:ConfirmButtonExtender ID="cbeDelete" TargetControlID="btnDelete" ConfirmText="Are you sure you want to delete? This action cannot be undone." runat="server">*@
+                    @*@Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
+            @Html.ActionLink("Details", "UserDetails", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })*@
+
+</td>
+    </tr>
+}
+
+   
+
+
+
+
+</table>
+
+
+
+
+
+@*@section scripts{
+    <script type="text/javascript">
+    $(function () {
+        $("a.delete-link").click(function () {
+            var deleteLink = $(this);
+            deleteLink.hide();
+            var confirmButton = deleteLink.siblings(".delete-confirm");
+            confirmButton.show();
+
+            var cancelDelete =  function () {
+                removeEvents();
+                showDeleteLink();
+            };
+
+            var deleteItem = function () {
+                removeEvents();
+                confirmButton.hide();
+                $.post(                    '@Url.Action("Delete")',
+                    AddAntiForgeryToken({ id: confirmButton.attr('data-delete-id') }))
+                   .done(function () {
+                       var parentRow = deleteLink.parents("tr:first");
+                       parentRow.fadeOut('fast', function () {
+                           parentRow.remove();
+                       });
+                   }).fail(function (data) {
+                       alert("error");
+                   });
+                return false;
+            };
+
+            var removeEvents = function () {
+                confirmButton.off("click", deleteItem);
+                $(document).on("click", cancelDelete);
+                $(document).off("keypress", onKeyPress);
+            };
+
+            var showDeleteLink = function () {
+                confirmButton.hide();
+                deleteLink.show();
+            };
+
+            var onKeyPress = function (e) {
+                //Cancel if escape key pressed
+                if (e.which == 27) {
+                    cancelDelete();
+                }
+            };
+
+            confirmButton.on("click", deleteItem);
+            $(document).on("click", cancelDelete);
+            $(document).on("keypress", onKeyPress);
+
+            return false;
+        });
+
+        AddAntiForgeryToken = function (data) {
+            data.__RequestVerificationToken = $('input[name=__RequestVerificationToken]').val();
+            return data;
+        };
+    });
+    </script>
+}*@
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("ListOfUsers", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+<style>
+      html {
+      
+ 
+        background: url('/assets/ibu-bg.jpg') no-repeat center center fixed;
+        /*webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;*/
+        background-size: cover;
+
+    }
+    
+.button {
+    position: relative;
+    background-color: #428bca;
+    border: none;
+    font-size: 12px;
+    color: #FFFFFF;
+    padding: 10px;
+    width: 90px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.button:after {
+    content: "";
+    background: #90EE90;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+
+}
+
+.button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+    body {
+        color:black;
+        background-color:transparent;
+        margin-bottom:auto;
+    }
+    .table{
+        
+        background-color:white;
+         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    width: 200px;
+    margin-left: -260px;
+    margin-right: auto;
+    }
+    
+    </style>
+
+

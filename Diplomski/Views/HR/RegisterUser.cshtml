@@ -1,0 +1,302 @@
+﻿@model Diplomski.Models.User
+
+@{
+    ViewBag.Title = "RegisterUser";
+}
+
+<h2>Employee Profile Creation</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @*/@Html.DropDownList("Departments","Select Department")*@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeRegNum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmployeeRegNum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmployeeRegNum, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Title", new List<SelectListItem> {
+
+               new SelectListItem {Text = " Research Assistant", Value="Research Assistant" },
+               new SelectListItem {Text = "Higher Research Assistant", Value="Higher Research Assistant" },
+               new SelectListItem {Text = "Assistant Professor", Value="Assistant Professor" },
+                new SelectListItem {Text = "Associate Professor", Value="Associate Professor" },
+                 new SelectListItem {Text = "Professor", Value="Professor" },
+                 new SelectListItem {Text = "Head of Department", Value="Head of Department" },
+                  new SelectListItem {Text = "Dean", Value="Dean" }
+
+
+
+
+                }, "Select Title")
+
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+                @*@Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Faculty, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Faculty", new List<SelectListItem> {
+
+               new SelectListItem {Text = "Faculty of Education", Value="Faculty of Education" },
+               new SelectListItem {Text = "Faculty of Economics and Social Sciences", Value="Faculty of Economics and Social Sciences" },
+               new SelectListItem {Text = "Faculty of Engineering and Information Technologies", Value="Faculty of Engineering and Information Technologies" }
+
+
+
+
+                }, "Select Faculty")
+                @Html.ValidationMessageFor(model => model.Faculty, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Department", new List<SelectListItem> {
+
+               new SelectListItem {Text = "Department of Information Technologies", Value="Department of Information Technologies" },
+               new SelectListItem {Text = "Department of Genetics and Bioengineering", Value="Department of Genetics and Bioengineering" },
+               new SelectListItem {Text = "Department of Electrical And Electronics Engineering", Value="Department of Electrical And Electronics Engineering" },
+               new SelectListItem {Text = "Department of Architecture", Value="Department of Architecture" },
+               new SelectListItem {Text = "Department of Management", Value="Department of Management" },
+               new SelectListItem {Text = "Department of International Relations and European Studies", Value="Department of International Relations and European Studies" },
+               new SelectListItem {Text = "Department of International Business", Value="Department of International Business" },
+               new SelectListItem {Text = "Department of Banking and Finance", Value="Department of Banking and Finance" },
+               new SelectListItem {Text = "Department of Oriental Philology", Value="Department of Oriental Philology" },
+               new SelectListItem {Text = "Department of English Language and Literature", Value="Department of English Language and Literature" },
+                  new SelectListItem {Text = "None", Value="None" }
+
+
+
+                }, "Select Department")
+                @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmploymentStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.EmploymentStatus)
+                    @Html.ValidationMessageFor(model => model.EmploymentStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+        @*<div class="editor-label">
+                @Html.LabelFor(model => model.Id)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.Id, @ViewBag.Id as SelectList, "Select Country")
+                @Html.ValidationMessageFor(model => model.Id)
+            </div>*@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Nationality", new List<SelectListItem> {
+
+               new SelectListItem {Text = "Austria", Value="Austria" },
+               new SelectListItem {Text = "Bosnia and Herzegovina ", Value="Bosnia and Herzegovina" },
+               new SelectListItem {Text = "Turkey", Value="Turkey" },
+
+               new SelectListItem {Text = "Australia", Value="Australia" },
+                new SelectListItem {Text = "Brazil", Value="Brazil" },
+                new SelectListItem {Text = "US", Value="US" },
+                 new SelectListItem {Text = "Malasia", Value="Malasia" },
+                  new SelectListItem {Text = "Croatia", Value="Croatia" },
+                   new SelectListItem {Text = "Serbia", Value="Serbia" },
+                    new SelectListItem {Text = "Montenegro", Value="Montenegro" },
+                     new SelectListItem {Text = "Belgium", Value="Belgium" },
+                     new SelectListItem {Text = "Luxemburg", Value="Luxemburg" },
+                     new SelectListItem {Text = "Egypt", Value="Egypt" }
+
+
+
+                }, "Select Nationality")
+                @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Nationality, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ElectoralPeriod, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Electoral Periods in years", new List<SelectListItem> {
+
+               new SelectListItem {Text = "4", Value="4" },
+               new SelectListItem {Text = "5", Value="5" },
+               new SelectListItem {Text = "6", Value="6" },
+               new SelectListItem {Text = "Undefined", Value="Undefined" }
+
+
+
+
+                }, "Select Faculty")
+                @Html.ValidationMessageFor(model => model.ElectoralPeriod, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContractExpiration, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ContractExpiration, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ContractExpiration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumberOfLeaveDays, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumberOfLeaveDays, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumberOfLeaveDays, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+        @Html.LabelFor(model => model.Stay, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Stay)
+                @Html.ValidationMessageFor(model => model.Stay, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script language="javascript">
+    $(document).ready(function () {
+        $("#Ids").change(function () {
+            // this will call when Country Dropdown select change
+            var Id = parseInt($("#Id").val());
+        }
+        </script>
+    }
+   }*@
